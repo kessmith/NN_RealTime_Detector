@@ -16,4 +16,3 @@ results = model(img)
 # Results
 results.print()
 results.show()
-# print(results.pandas().xyxy[0])
