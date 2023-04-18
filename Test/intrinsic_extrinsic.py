@@ -2,7 +2,6 @@
 import cv2
 import numpy as np
 
-# Testing to see if I need to make the same changes each time
 class slamLogicHandler:
     def __init__(self):
         pass
