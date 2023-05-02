@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 import cv2
 import numpy as np
+import pandas as pd
 
 class slamLogicHandler:
     def __init__(self):
         pass
     
-    def intrinsicParamConvert(self, params):
+    def intrinsicParamConvert(self, params, excelSave):
         # Params De-construction
         pixel_coord = np.array([params['intr_x'], params['intr_y'], params['depth']])
         # focal_length = params['foc_length']
@@ -16,4 +17,11 @@ class slamLogicHandler:
 
         world_coord = pixel_coord.dot(inv_cam_matrix)
         print('3D Coordinates: ', world_coord)
+
+        if excelSave:
+            self.writeToExcel(pixel_coord, world_coord)
         return world_coord[0], world_coord[1], world_coord[2]
+
+    def writeToExcel(self, intrinsic, extrinsic):
+        pd.DataFrame([intrinsic, extrinsic]) \
+            .to_excel('Experiment_Results.xlsx', sheet_name='Single Robot Results')

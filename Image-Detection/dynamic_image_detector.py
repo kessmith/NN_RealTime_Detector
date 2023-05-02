@@ -2,7 +2,7 @@
 import os
 import cv2
 import torch
-import pandas as pd
+
 
 from intrinsic_extrinsic import slamLogicHandler
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -51,11 +51,9 @@ while 1:
             'depth': intrinsic_depth
         }
         # print(params)
-        ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+        ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params, excelSave=True)
         # print('x= ' + str(ext_param_x) + ' y= ' + str(ext_params_y) + ' z= ' + str(ext_param_z))
         print('Converted coordinates to their world coordinates')
-
-        # Create some form of functionality to save my extrinsic and intrinsic parameters to an excel sheet
 
     k = cv2.waitKey(30) & 0xff
     if k == 27:
