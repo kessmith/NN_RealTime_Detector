@@ -22,6 +22,7 @@ class slamLogicHandler:
             self.writeToExcel(pixel_coord, world_coord)
         return world_coord[0], world_coord[1], world_coord[2]
 
+#   This function may not be necessary and I may just need to figure out a new way to implement this idea
     def writeToExcel(self, intrinsic, extrinsic):
         pd.DataFrame([intrinsic, extrinsic]) \
             .to_excel('Experiment_Results.xlsx', sheet_name='Single Robot Results')
