@@ -13,9 +13,9 @@ cap = cv2.VideoCapture(0)
 
 # model = torch.hub.load('ultralytics/yolov5', 'yolov5s', force_reload=True)
 # Insert Yolov5 model
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='weights/weight_v2.pt', force_reload=True)
+model = torch.hub.load('ultralytics/yolov5', 'custom', path='weights/weight_v3.pt', force_reload=True)
 
-model = torch.hub.load('yolov5', 'custom', path="weights/weight_v2.pt", source='local')
+model = torch.hub.load('yolov5', 'custom', path="weights/weight_v3.pt", source='local')
 
 while 1:
     ret,img = cap.read()
@@ -51,7 +51,7 @@ while 1:
             'depth': intrinsic_depth
         }
         # print(params)
-        ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params, excelSave=True)
+        ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params, excelSave=False)
         # print('x= ' + str(ext_param_x) + ' y= ' + str(ext_params_y) + ' z= ' + str(ext_param_z))
         print('Converted coordinates to their world coordinates')
 
