@@ -16,7 +16,8 @@ class slamLogicHandler:
         inv_cam_matrix = np.linalg.inv(camera_matrix)
 
         world_coord = pixel_coord.dot(inv_cam_matrix)
-        print('3D Coordinates: ', world_coord)
+        # Will uncomment this once all the code is updated
+        # print('3D Coordinates: ', world_coord)
 
         if excelSave:
             self.writeToExcel(pixel_coord, world_coord)

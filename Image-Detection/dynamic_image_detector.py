@@ -29,6 +29,10 @@ while 1:
     cv2.imshow('Output', img)
     # Prints the results of inference (detected items) to the terminal
     # results.print()
+    print('X_Min Value is: ', x_min)
+    print('X_Max Value is: ', x_max)
+    print('Y_min Value is: ', y_min)
+    print('Y_Max Value is: ', y_max)
     x_min = results.pandas().xyxy[0]['xmin']
     y_min = results.pandas().xyxy[0]['ymin']
     x_max = results.pandas().xyxy[0]['xmax']
