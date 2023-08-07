@@ -40,19 +40,55 @@ while 1:
         y = y_min[0]/y_max[0]
         # width = int((x_max[0] - x_min[0]) / x_max[0])
         # height = int((y_max[0] - y_min[0]) / y_max[0])
+        """
+            Depth will be an entire equation: Based on position of camera's starting point.
+            We will approximate the depth by gathering the values of x and y at the corner point of the testing area and use that as a sampling point
 
-        # Depth will be an entire equation: Based on position of camera's starting point.
-        # We will approximate the depth by gathering the values of x and y at the corner point of the testing area and use that as a sampling point
-        intrinsic_depth = 100 # This is for now
+            Question to think about within the lab: Does the depth change going straight up vs. side to side
+            - My current hypothesis is that if I measure the depth at the midpoint on one side, the depth at the midpoint on the other side should be approx. the same. And same could be hypothesized for the middle point as well.
+            - Which makes me think that with all this information and measured data we can pretty much be able to calculate the depth at any point within the frame as long as we have these 5 depth points
 
-        params = {
-            'intr_x': x,
-            'intr_y': y,
-            'depth': intrinsic_depth
-        }
-        # print(params)
-        ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params, excelSave=False)
-        # print('x= ' + str(ext_param_x) + ' y= ' + str(ext_params_y) + ' z= ' + str(ext_param_z))
+            Future Question to Consider: Could the below logic be simplified?
+        """
+
+        # Left Front Corner Depth
+        for x in range(0.75, 0.80) and y in range(0.79, 0.85):
+            intrinsic_depth = 96 # This is in inches
+            params = {
+                'intr_x': x,
+                'intr_y': y,
+                'depth': intrinsic_depth
+            }
+            ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+        # Left Back Corner Depth
+        for x in range(0.86, 0.91) and y in range(0.82, 0.87):
+            intrinsic_depth = 141 # This is in inches
+            params = {
+                'intr_x': x,
+                'intr_y': y,
+                'depth': intrinsic_depth
+            }
+            ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+        # Right Front Corner
+        for x in range(0.85, 0.90) and y in range(0.80, 0.85):
+            intrinsic_depth = 91 # This is in inches
+            params = {
+                'intr_x': x,
+                'intr_y': y,
+                'depth': intrinsic_depth
+            }
+            ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+        # Right Back Corner
+        for x in range(0.89, 0.94) and y in range(0.80, 0.85):
+            intrinsic_depth = 141 # This is in inches
+            params = {
+                'intr_x': x,
+                'intr_y': y,
+                'depth': intrinsic_depth
+            }
+            ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+        # Fraem Center Point (This will be updated to include the dead center depth information)
+
         print('Converted coordinates to their world coordinates')
 
     k = cv2.waitKey(30) & 0xff
