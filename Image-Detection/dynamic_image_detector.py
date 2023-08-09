@@ -2,6 +2,7 @@
 import os
 import cv2
 import torch
+import numpy as np
 
 
 from intrinsic_extrinsic import slamLogicHandler
@@ -51,8 +52,8 @@ while 1:
             Future Question to Consider: Could the below logic be simplified?
         """
 
-        # Left Front Corner Depth
-        for x in range(0.75, 0.80) and y in range(0.79, 0.85):
+        # Updated Calculation Metric
+        if float(x) >= 0.75 and float(x) <= 0.80:
             intrinsic_depth = 96 # This is in inches
             params = {
                 'intr_x': x,
@@ -60,17 +61,15 @@ while 1:
                 'depth': intrinsic_depth
             }
             ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
-        # Left Back Corner Depth
-        for x in range(0.86, 0.91) and y in range(0.82, 0.87):
+        elif float(x) in np.arange(0.86, 0.91) and float(y) in np.arange(0.82, 0.87):
             intrinsic_depth = 141 # This is in inches
             params = {
                 'intr_x': x,
                 'intr_y': y,
                 'depth': intrinsic_depth
-            }
+                }
             ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
-        # Right Front Corner
-        for x in range(0.85, 0.90) and y in range(0.80, 0.85):
+        elif float(x) in np.arange(0.85, 0.90) and float(y) in np.arange(0.80, 0.85):
             intrinsic_depth = 91 # This is in inches
             params = {
                 'intr_x': x,
@@ -78,15 +77,51 @@ while 1:
                 'depth': intrinsic_depth
             }
             ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
-        # Right Back Corner
-        for x in range(0.89, 0.94) and y in range(0.80, 0.85):
+        elif float(x) in np.arange(0.89, 0.94) and float(y) in np.arange(0.80, 0.85):
             intrinsic_depth = 141 # This is in inches
             params = {
                 'intr_x': x,
                 'intr_y': y,
                 'depth': intrinsic_depth
             }
-            ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+            ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)               
+
+        # Left Front Corner Depth
+        # for x in np.arange(0.75, 0.80) and y in np.arange(0.79, 0.85):
+        #     intrinsic_depth = 96 # This is in inches
+        #     params = {
+        #         'intr_x': x,
+        #         'intr_y': y,
+        #         'depth': intrinsic_depth
+        #     }
+        #     ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+        # # Left Back Corner Depth
+        # for x in np.arange(0.86, 0.91) and y in np.arange(0.82, 0.87):
+        #     intrinsic_depth = 141 # This is in inches
+        #     params = {
+        #         'intr_x': x,
+        #         'intr_y': y,
+        #         'depth': intrinsic_depth
+        #     }
+        #     ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+        # # Right Front Corner
+        # for x in np.arange(0.85, 0.90) and y in np.arange(0.80, 0.85):
+        #     intrinsic_depth = 91 # This is in inches
+        #     params = {
+        #         'intr_x': x,
+        #         'intr_y': y,
+        #         'depth': intrinsic_depth
+        #     }
+        #     ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
+        # # Right Back Corner
+        # for x in np.arange(0.89, 0.94) and y in np.arange(0.80, 0.85):
+        #     intrinsic_depth = 141 # This is in inches
+        #     params = {
+        #         'intr_x': x,
+        #         'intr_y': y,
+        #         'depth': intrinsic_depth
+        #     }
+        #     ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
         # Fraem Center Point (This will be updated to include the dead center depth information)
 
         print('Converted coordinates to their world coordinates')
