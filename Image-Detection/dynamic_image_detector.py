@@ -37,8 +37,10 @@ while 1:
 
     if x_min.empty is False:
         # Normallizing the above values -> Giving them as a porition fo the whole image
-        x = x_min[0]/x_max[0]
-        y = y_min[0]/y_max[0]
+        x = float(x_min[0]/x_max[0])
+        x = round(x,2)
+        y = float(y_min[0]/y_max[0])
+        y = round(y,2)
         # width = int((x_max[0] - x_min[0]) / x_max[0])
         # height = int((y_max[0] - y_min[0]) / y_max[0])
         """
@@ -51,9 +53,24 @@ while 1:
 
             Future Question to Consider: Could the below logic be simplified?
         """
+        print('This is your x value: ', x)
+        print('This is your y value: ', y)
+
+        x_first = [0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.80]
+        y_first = [0.77, 0.78, 0.79, 0.80, 0.81, 0.82, 0.83, 0.84, 0.85, 0.86]
+
+        x_two = [0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.90, 0.91]
+        y_two = [0.82, 0.83, 0.84, 0.85, 0.86, 0.87]
+
+        x_third = [0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.90]
+        y_third = [0.80, 0.81, 0.82, 0.83, 0.84, 0.85]
+
+        x_four = [0.89, 0.90, 0.91, 0.92, 0.93, 0.94]
+        y_four = [0.78, 0.79, 0.80, 0.81, 0.82, 0.83, 0.84, 0.85]
 
         # Updated Calculation Metric
-        if float(x) >= 0.75 and float(x) <= 0.80:
+        if x in x_first and y in y_first:
+            print('I am going inside of the first if statement')
             intrinsic_depth = 96 # This is in inches
             params = {
                 'intr_x': x,
@@ -61,7 +78,8 @@ while 1:
                 'depth': intrinsic_depth
             }
             ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
-        elif float(x) in np.arange(0.86, 0.91) and float(y) in np.arange(0.82, 0.87):
+        elif x in x_two and y in y_two:
+            print('I am running within the first elif statement ')
             intrinsic_depth = 141 # This is in inches
             params = {
                 'intr_x': x,
@@ -69,7 +87,8 @@ while 1:
                 'depth': intrinsic_depth
                 }
             ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
-        elif float(x) in np.arange(0.85, 0.90) and float(y) in np.arange(0.80, 0.85):
+        elif x in x_third and y in y_third:
+            print('I am running within the third elif statement ')
             intrinsic_depth = 91 # This is in inches
             params = {
                 'intr_x': x,
@@ -77,7 +96,8 @@ while 1:
                 'depth': intrinsic_depth
             }
             ext_param_x, ext_params_y, ext_param_z = coordinateConverter.intrinsicParamConvert(params)
-        elif float(x) in np.arange(0.89, 0.94) and float(y) in np.arange(0.80, 0.85):
+        elif x in x_four and y in y_four:
+            print('I am running within the final elif statement ')
             intrinsic_depth = 141 # This is in inches
             params = {
                 'intr_x': x,
